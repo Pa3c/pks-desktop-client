@@ -36,7 +36,32 @@ public class UserService {
 		u.setSurname(surname);
 		u.setPassword(password);
 		u.setRole(new UserRole("Common"));
-		
+
+		userRepository.save(u);
+	}
+
+		public void save(String login, String email, String name, String surname, String password,UserRole role) {
+		if (login == null || login.isEmpty())
+			return;
+		if (email == null || email.isEmpty())
+			return;
+		if (name == null || name.isEmpty())
+			return;
+		if (surname == null || surname.isEmpty())
+			return;
+		if (password == null || password.isEmpty())
+			return;
+		if(role == null || role.getRole().isEmpty())
+			return;
+
+		User u = new User();
+		u.setLogin(login);
+		u.setEmail(email);
+		u.setName(surname);
+		u.setSurname(surname);
+		u.setPassword(password);
+		u.setRole(role);
+
 		userRepository.save(u);
 	}
 

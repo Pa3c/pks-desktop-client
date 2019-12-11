@@ -58,16 +58,16 @@ public class BusStop {
 		e.setStartStop(null);
 	}
 
-	@OneToMany(mappedBy = "busStops")
+	@OneToMany(mappedBy = "busStop")
 	private List<Track> tracks;
 
 	public void addTrack(Track t) {
 		tracks.add(t);
-		t.setBusStops(this);
+		t.setBusStop(this);
 	}
 
 	public void removeTrack(Track t) {
 		tracks.remove(t);
-		t.setBusStops(null);
+		t.setBusStop(null);
 	}
 }

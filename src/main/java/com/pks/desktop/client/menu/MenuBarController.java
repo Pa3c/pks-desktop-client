@@ -12,18 +12,29 @@ import javafx.scene.control.MenuItem;
 public class MenuBarController {
 
 	@FXML
-	private Menu openMenu;
+	private Menu openMenu,optionsMenu;
 
 	private MenuBarListener menuBarListener;
 
 	@FXML
 	private void initialize() {
+		if(DataStorage.getUser()==null)
+			return;
+		
+		MenuItem logoutItem = new MenuItem("Wyloguj się");
+		logoutItem.setOnAction(x->{
+			DataStorage.setUser(null);
+			menuBarListener.logout();
+		});
+		optionsMenu.getItems().add(logoutItem);
+		
+		
 		if (!DataStorage.getUser().getRole().getRole().equals("Admin"))
 			return;
 
-		MenuItem item = new MenuItem("Panel Administracyjny");
-		item.setOnAction(x -> openAdminPanel());
-		openMenu.getItems().add(item);
+		MenuItem openAdmin = new MenuItem("Panel Administracyjny");
+		openAdmin.setOnAction(x -> openAdminPanel());
+		openMenu.getItems().add(openAdmin);
 	}
 
 	public void setMenuBarListener(MenuBarListener menuBarListener) {

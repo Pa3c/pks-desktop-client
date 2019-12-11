@@ -16,9 +16,6 @@
 			</items>
 		</Menu>
 		<Menu mnemonicParsing="false" text="Opcje" fx:id="optionsMenu">
-			<items>
-				<MenuItem mnemonicParsing="false" text="Wyloguj się" />
-			</items>
 		</Menu>
 		<Menu mnemonicParsing="false" text="Pomoc" fx:id="helpMenu">
 			<items>

@@ -22,6 +22,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 
 @Controller
 @Scope("singleton")
@@ -82,6 +83,7 @@ public class MainLayoutController implements SearchPanelListener, MenuBarListene
 	public void openAdminPanel() {
 		try {
 			initAdminLeftPanel();
+			mainPane.setCenter(new Pane());
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
@@ -99,7 +101,7 @@ public class MainLayoutController implements SearchPanelListener, MenuBarListene
 
 	@Override
 	public void setInsertView(String name) {
-		String path = "../leftPanel/managepanel/" + name + "/" + name + "PanelLayout.fxml";
+		String path = "../centerpanel/managepanel/" + name + "/" + name + "PanelLayout.fxml";
 		try {
 			mainPane.setCenter(springFXMLLoader.load(path));
 		} catch (IOException e) {
@@ -109,7 +111,15 @@ public class MainLayoutController implements SearchPanelListener, MenuBarListene
 
 	@Override
 	public void setSelectView(String name) {
-		// TODO Auto-generated method stub
+		
+	}
 
+	@Override
+	public void logout() {
+		try {
+			mainPane.getScene().setRoot(springFXMLLoader.load("../welcomepanel/WelcomeLayout.fxml"));
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 }

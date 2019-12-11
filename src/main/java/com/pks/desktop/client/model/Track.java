@@ -4,16 +4,17 @@ import java.io.Serializable;
 import java.sql.Time;
 
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
-import lombok.Data;
-import lombok.Setter;
 import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table
@@ -21,17 +22,16 @@ import lombok.Getter;
 @Setter
 public class Track implements Serializable {
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -8096450642149363922L;
-
-	@EmbeddedId
+	
+	@Id
+	@Column(name = "id_stop")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@PrimaryKeyJoinColumn(name = "id_stop")
-	private BusStop busStops;
+	private BusStop busStop;
 
-	@EmbeddedId
 	@ManyToOne(fetch = FetchType.LAZY)
 	@PrimaryKeyJoinColumn(name = "id_course")
 	private BusCourse busCourse;

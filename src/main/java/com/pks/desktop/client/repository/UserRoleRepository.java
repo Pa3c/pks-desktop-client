@@ -8,4 +8,5 @@ import com.pks.desktop.client.model.UserRole;
 
 public interface UserRoleRepository extends CrudRepository<UserRole, String> {
 	List<UserRole> findAll();
+	void deleteByRole(String role);
 }

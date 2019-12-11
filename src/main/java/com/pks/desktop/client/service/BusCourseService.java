@@ -15,39 +15,39 @@ import com.pks.desktop.client.table.model.BusCourseTableModel;
 
 @Service
 public class BusCourseService {
-	
+
 	@Autowired
 	private BusCourseRepository busCourseRepository;
-	
+
 	@Transactional
-	public List<BusCourseTableModel> getBusCourseTableModelListByCities(String startStopCity,String endStopCity){
+	public List<BusCourseTableModel> getBusCourseTableModelListByCities(String startStopCity, String endStopCity) {
 		List<BusCourseTableModel> list = new ArrayList<>();
-				busCourseRepository
-				.findAllByStartStopCityAndEndStopCity(startStopCity, endStopCity)
-				.forEach(x->list.add(
-						new BusCourseTableModel(
-								x.getId(),
-								x.getStartStop().getCity(),
-								x.getEndStop().getCity(),
-								x.getBeginTime().toString(),
-								x.getEndTime().toString(),
-								x.getDriver().getName()+" "+x.getDriver().getSurname(),
-								x.getBus().getBrand(),
-								String.valueOf(
-										x.getTracks()
-										.stream()
-										.filter(t->t.getBusCourse().getId()==x.getId())
-										.mapToDouble(Track::getTicketPrice)
-										.sum()
-										)
-									)
-						));
-				return list;
+		busCourseRepository.findAllByStartStopCityAndEndStopCity(startStopCity, endStopCity)
+				.forEach(x -> list.add(new BusCourseTableModel(x.getId(), x.getStartStop().getCity(),
+						x.getEndStop().getCity(), x.getBeginTime().toString(), x.getEndTime().toString(),
+						x.getDriver().getName() + " " + x.getDriver().getSurname(), x.getBus().getBrand(),
+						String.valueOf(x.getTracks().stream().filter(t -> t.getBusCourse().getId() == x.getId())
+								.mapToDouble(Track::getTicketPrice).sum()))));
+		return list;
 	}
-	
+
 	public BusCourse findBusCourseById(int id) {
 		return busCourseRepository.findCourseById(id);
 	}
 
+	public void delete(int id) {
+		busCourseRepository.deleteById(id);
+	}
+
+	public List<BusCourseTableModel> getTableModels() {
+		List<BusCourseTableModel> list = new ArrayList<>();
+		busCourseRepository.findAll()
+				.forEach(x -> list.add(new BusCourseTableModel(x.getId(), x.getStartStop().getCity(),
+						x.getEndStop().getCity(), x.getBeginTime().toString(), x.getEndTime().toString(),
+						x.getDriver().getName() + " " + x.getDriver().getSurname(), x.getBus().getBrand(),
+						String.valueOf(x.getTracks().stream().filter(t -> t.getBusCourse().getId() == x.getId())
+								.mapToDouble(Track::getTicketPrice).sum()))));
+		return list;
+	}
 
 }

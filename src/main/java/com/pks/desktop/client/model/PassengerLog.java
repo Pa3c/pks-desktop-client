@@ -12,11 +12,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.Getter;
 import lombok.Setter;
 
 @Table( name = "passenger_log")
 @Entity
 @Setter
+@Getter
 public class PassengerLog {
 
 	@Id

@@ -111,7 +111,13 @@ public class MainLayoutController implements SearchPanelListener, MenuBarListene
 
 	@Override
 	public void setSelectView(String name) {
-		
+		String name2 = name.substring(0, 1).toUpperCase().concat(name.substring(1,name.length()));
+		String path = "../centerpanel/selectpanel/" + name + "/Select" + name2 + "PanelLayout.fxml";
+		try {
+			mainPane.setCenter(springFXMLLoader.load(path));
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
 	@Override

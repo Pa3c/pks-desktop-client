@@ -5,14 +5,13 @@ import javafx.beans.property.SimpleStringProperty;
 
 public class BusTableModel {
 	private final SimpleStringProperty brand, model;
-	private final SimpleIntegerProperty id, freePlaces, equipment;
+	private final SimpleIntegerProperty id, freePlaces;
 
-	public BusTableModel(Integer id, String brand, String model, Integer freePlaces, Integer equipment) {
+	public BusTableModel(Integer id, String brand, String model, Integer freePlaces) {
 		this.id = new SimpleIntegerProperty(id);
 		this.brand = new SimpleStringProperty(brand);
 		this.model = new SimpleStringProperty(model);
 		this.freePlaces = new SimpleIntegerProperty(freePlaces);
-		this.equipment = new SimpleIntegerProperty(equipment);
 	}
 
 	public int getId() {
@@ -27,9 +26,6 @@ public class BusTableModel {
 		return model.get();
 	}
 
-	public int getEquipment() {
-		return equipment.get();
-	}
 
 	public int getfreePlaces() {
 		return freePlaces.get();
